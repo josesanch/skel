@@ -1,0 +1,4 @@
+# Assetic Configuration
+assetic:
+  use_controller: true
+

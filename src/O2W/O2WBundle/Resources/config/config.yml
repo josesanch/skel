@@ -1,0 +1,175 @@
+framework:
+  form:            true
+  charset:         UTF-8
+  secret:  %secret%
+  templating: { engines: ['twig'] }
+  profiler: { only_exceptions: false }
+  router:   { resource: "@O2WBundle/Resources/config/routing.yml" }
+  csrf_protection: true
+  # session configuration
+  session:
+    auto_start:           ~
+    default_locale:       es
+
+
+avalanche_imagine:
+  source_root:  %kernel.root_dir%/../htdocs
+  web_root:     %kernel.root_dir%/../htdocs
+
+
+doctrine:
+    dbal:
+        driver:   %database_driver%
+        host:     %database_host%
+        dbname:   %database_name%
+        user:     %database_user%
+        password: %database_password%
+
+    orm:
+      auto_generate_proxy_classes: %kernel.debug%
+      auto_mapping: true
+
+
+# Assetic Configuration
+assetic:
+  debug:          %kernel.debug%
+  use_controller: true
+  # java: /usr/bin/java
+  filters:
+    yui_js:
+      jar: /usr/share/yui-compressor/yui-compressor.jar
+    yui_css:
+      jar: /usr/share/yui-compressor/yui-compressor.jar
+    less: ~
+
+
+
+security:
+  providers:
+    in_memory:
+      users:
+        user:  { password: userpass, roles: [ 'ROLE_USER' ] }
+
+  role_hierarchy:
+    ROLE_ADMIN:       ROLE_USER
+    ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+
+  access_control:
+  firewalls:
+    admin:
+      pattern:  ^/administration/
+      form_login:
+        check_path: /administration/check
+        login_path: /administration/login
+      logout:
+          path:   /administration/logout
+          target: /
+
+
+
+# Twig Configuration
+twig:
+  debug:            %kernel.debug%
+  strict_variables: %kernel.debug%
+  form:
+    resources:
+      - 'IoFormBundle:Form:fields.html.twig'
+
+io_form:
+  jquery_tinymce:
+    source: /bundles/yourbundle/js/tiny_mce/tiny_mce.js
+    theme:  simple
+
+
+
+sonata_block:
+  default_contexts: [cms]
+  blocks:
+    sonata.admin.block.admin_list:
+      contexts:   [admin]
+
+      #sonata.admin_doctrine_orm.block.audit:
+      #    contexts:   [admin]
+
+    sonata.block.service.text:
+    sonata.block.service.action:
+    sonata.block.service.rss:
+
+      # Some specific block from the SonataMediaBundle
+    sonata.media.block.media:
+    sonata.media.block.gallery:
+    sonata.media.block.feature_media:
+
+sonata_doctrine_orm_admin:
+  # default value is null, so doctrine uses the value defined in the configuration
+  entity_manager: ~
+
+  templates:
+    form:
+      - SonataDoctrineORMAdminBundle:Form:form_admin_fields.html.twig
+    filter:
+      - SonataDoctrineORMAdminBundle:Form:filter_admin_fields.html.twig
+    types:
+      list:
+        array:      SonataAdminBundle:CRUD:list_array.html.twig
+        boolean:    SonataAdminBundle:CRUD:list_boolean.html.twig
+        date:       SonataAdminBundle:CRUD:list_date.html.twig
+        time:       SonataAdminBundle:CRUD:list_time.html.twig
+        datetime:   SonataAdminBundle:CRUD:list_datetime.html.twig
+        text:       SonataAdminBundle:CRUD:base_list_field.html.twig
+        trans:      SonataAdminBundle:CRUD:list_trans.html.twig
+        string:     SonataAdminBundle:CRUD:base_list_field.html.twig
+        smallint:   SonataAdminBundle:CRUD:base_list_field.html.twig
+        bigint:     SonataAdminBundle:CRUD:base_list_field.html.twig
+        integer:    SonataAdminBundle:CRUD:base_list_field.html.twig
+        decimal:    SonataAdminBundle:CRUD:base_list_field.html.twig
+        identifier: SonataAdminBundle:CRUD:base_list_field.html.twig
+
+      show:
+        array:      SonataAdminBundle:CRUD:show_array.html.twig
+        boolean:    SonataAdminBundle:CRUD:show_boolean.html.twig
+        date:       SonataAdminBundle:CRUD:show_date.html.twig
+        time:       SonataAdminBundle:CRUD:show_time.html.twig
+        datetime:   SonataAdminBundle:CRUD:show_datetime.html.twig
+        text:       SonataAdminBundle:CRUD:base_show_field.html.twig
+        trans:      SonataAdminBundle:CRUD:show_trans.html.twig
+        string:     SonataAdminBundle:CRUD:base_show_field.html.twig
+        smallint:   SonataAdminBundle:CRUD:base_show_field.html.twig
+        bigint:     SonataAdminBundle:CRUD:base_show_field.html.twig
+        integer:    SonataAdminBundle:CRUD:base_show_field.html.twig
+        decimal:    SonataAdminBundle:CRUD:base_show_field.html.twig
+
+
+# app/config/config.yml
+services:
+  sf_tuts.jobeet.admin.job:
+    class: O2W\O2WBundle\Admin\BaseNodeAdmin
+    tags:
+      - { name: sonata.admin, manager_type: orm, group: o2w, label: Nodos }
+    arguments: [null, O2W\O2WBundle\Entity\BaseNode, O2WBundle:BaseNodeAdmin]
+
+
+    # app/config/config.yml
+sonata_admin:
+  title:      proyect proyect
+  title_logo: /bundles/sonataadmin/logo_title.png
+  templates:
+    # default global templates
+    layout:  SonataAdminBundle::standard_layout.html.twig
+    ajax:    SonataAdminBundle::ajax_layout.html.twig
+
+    # default actions templates, should extend a global templates
+    list:    SonataAdminBundle:CRUD:list.html.twig
+    show:    SonataAdminBundle:CRUD:show.html.twig
+    edit:    SonataAdminBundle:CRUD:edit.html.twig
+ # dashboard:
+ #   blocks:
+      # display a dashboard block
+#      - { position: left, type: sonata.admin.block.admin_list }
+
+#    groups:
+  #      default: ~
+
+
+#o2w_base:
+#  title: Hola que tal

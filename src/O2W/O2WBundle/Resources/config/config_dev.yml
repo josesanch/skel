@@ -1,0 +1,28 @@
+framework:
+    router:   { resource: "@O2WBundle/Resources/config/routing_dev.yml" }
+    profiler: { only_exceptions: false }
+
+web_profiler:
+    toolbar: true
+    intercept_redirects: false
+
+
+monolog:
+  handlers:
+    main:
+      type:  stream
+      path:  %kernel.logs_dir%/%kernel.environment%.log
+      level: debug
+
+    firephp:
+      type:  firephp
+      level: info
+
+
+swiftmailer:
+  disable_delivery: true
+
+
+# Assetic Configuration
+assetic:
+  use_controller: true

@@ -1,0 +1,43 @@
+web:
+  resource: "@WebBundle/Controller"
+  type:     annotation
+
+AdminBundle:
+  resource: "@AdminBundle/Controller"
+  type:     annotation
+#  prefix : /admin
+
+O2WBundle:
+  resource: "@O2WBundle/Controller"
+  type:     annotation
+
+
+_imagine:
+    resource: .
+    type:     imagine
+
+
+_assetic:
+  resource: .
+  type:     assetic
+
+admin:
+  resource: '@SonataAdminBundle/Resources/config/routing/sonata_admin.xml'
+  prefix: /sonata
+
+_sonata_admin:
+  resource: .
+  type: sonata_admin
+  prefix: /sonata
+
+
+
+slug_route:
+  pattern: /{slug}
+  defaults: { _controller: O2WBundle:Slug:find }
+  requirements:
+    slug : .*
+
+
+Other_routes:
+  resource: ../../app/config/routing.yml
