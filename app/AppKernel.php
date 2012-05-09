@@ -31,13 +31,15 @@ class AppKernel extends Kernel
             new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
 
             // SonataAdminBundle
-            new Sonata\AdminBundle\SonataAdminBundle(),
-            new Sonata\BlockBundle\SonataBlockBundle(),
-            new Sonata\CacheBundle\SonataCacheBundle(),
-            new Sonata\jQueryBundle\SonatajQueryBundle(),
-            new Knp\Bundle\MenuBundle\KnpMenuBundle(),
-            new Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle(),
-            new SimpleThings\EntityAudit\SimpleThingsEntityAuditBundle(),
+#            new Sonata\AdminBundle\SonataAdminBundle(),
+#            new Sonata\BlockBundle\SonataBlockBundle(),
+#            new Sonata\CacheBundle\SonataCacheBundle(),
+            #            new Sonata\jQueryBundle\SonatajQueryBundle(),
+
+
+#           new Knp\Bundle\MenuBundle\KnpMenuBundle(),
+#            new Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle(),
+#            new SimpleThings\EntityAudit\SimpleThingsEntityAuditBundle(),
 
         );
 
