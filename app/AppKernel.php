@@ -17,6 +17,28 @@ class AppKernel extends Kernel
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
+
+	    # O2W
+            new O2W\O2WBundle\O2WBundle(),
+            new O2W\WebBundle\WebBundle(),
+            new O2W\AdminBundle\AdminBundle(),
+
+            # For imgs
+            new Avalanche\Bundle\ImagineBundle\AvalancheImagineBundle(),
+
+            # Forms
+            new Io\FormBundle\IoFormBundle(),
+            new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
+
+            // SonataAdminBundle
+            new Sonata\AdminBundle\SonataAdminBundle(),
+            new Sonata\BlockBundle\SonataBlockBundle(),
+            new Sonata\CacheBundle\SonataCacheBundle(),
+            new Sonata\jQueryBundle\SonatajQueryBundle(),
+            new Knp\Bundle\MenuBundle\KnpMenuBundle(),
+            new Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle(),
+            new SimpleThings\EntityAudit\SimpleThingsEntityAuditBundle(),
+
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
